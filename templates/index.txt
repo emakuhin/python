@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang='en'>
+<html>
+<head>
+ <title>First Page</title>
+<h1>Выодим секретный ключ</h1>
+ <h3>secret лун: {{secret}}</h3>
+</head>
+<body>
