@@ -3,7 +3,8 @@ import views
 
 urlpatterns = {
     '/': views.index,
-    '/about/': views.about
+    '/about/': views.about,
+    '/contact/': views.contact_view
     }
 
 def secret_controller(request):
@@ -21,3 +22,5 @@ front_controllers = [
 
 
 application = Application(urlpatterns, front_controllers)
+
+
