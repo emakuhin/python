@@ -58,4 +58,4 @@ class Application:
             return [text.encode('utf-8')]
         else:
             start_response('404 NOT FOUND', [('Content-Type', 'text/html')])
-            return [b"Not Found"] 
+            return [b"Not Found"]
