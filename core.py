@@ -8,6 +8,11 @@ class Application:
         val_decode_str = quopri.decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
+    def add_route(self, url):
+        def inner(view):
+            self.urlpatterns[url] = view
+        return inner
+
     def parse_input_data(self, data: str):
         result = {}
         if data:
