@@ -1,0 +1,11 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Наши преподаватели
+{% endblock %}
+{% block body %}
+<h3>Авторы</h3>
+<h2>Имя</h2>
+{% for person in names %}
+<h2>{{person}}</h2>
+{% endfor %}
+{% endblock %}
