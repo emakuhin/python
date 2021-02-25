@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Контакты</title>
-</head>
-<body>
+{% extends "wrapper.html" %}
+{% block body %}
     <h1>Заголовок: {{title}}</h1>
     <h1>Текст: {{text}}</h1>
-    <h1>Email: {{email}}
-</body>
-</html>
+<h1>Email: {{email}}</h1>
+{% endblock %}

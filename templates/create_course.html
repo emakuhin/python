@@ -1,0 +1,17 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Категории курсов
+{% endblock %}
+{% block body %}
+<h1>Создание курсов</h1>
+<form method="post">
+    <input type="text" name="name" placeholder="Название">
+    <select name = "category">
+        <option selected>Категории</option>
+        {% for item in categories %}
+        <option>{{item.name}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

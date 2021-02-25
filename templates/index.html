@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
+{% extends "wrapper.html" %}
+{% block title %}
+Список курсов
+{% endblock %}
+{% block body %}
     <h1>Обучение программированию</h1>
     <h3>secret: {{secret}}</h3>
-</body>
-</html>
+    <h3>Список курсов</h3>
+{% for course in courses %}
+<h2>{{course}}</h2>
+{% endfor %}
+{% endblock %}

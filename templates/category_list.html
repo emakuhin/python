@@ -1,0 +1,15 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Список курсов
+{% endblock %}
+{% block body %}
+<h1>Список категорий</h1>
+<ul>
+
+    {% for item in items %}
+    <li>
+        {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

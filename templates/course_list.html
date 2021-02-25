@@ -1,0 +1,15 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Список курсов
+{% endblock %}
+{% block body %}
+<h1>Список курсов</h1>
+<ul>
+
+    {% for item in courses %}
+    <li>
+        {{item.name}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

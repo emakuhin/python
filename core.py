@@ -1,4 +1,12 @@
+from wsgiref.util import setup_testing_defaults
+import quopri
+
 class Application:
+
+    def decode_value(val):
+        val_b = bytes(val.replace('%', '=').replace("+", " "), 'UTF-8')
+        val_decode_str = quopri.decodestring(val_b)
+        return val_decode_str.decode('UTF-8')
 
     def parse_input_data(self, data: str):
         result = {}
@@ -32,6 +40,7 @@ class Application:
         self.front_controllers = front_controllers
 
     def __call__(self, env, start_response):
+        setup_testing_defaults(env)
         # текущий url
         path = env['PATH_INFO']
         if not path.endswith('/'):
