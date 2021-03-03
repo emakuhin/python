@@ -1,0 +1,15 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Список студентов
+{% endblock %}
+{% block body %}
+<h1>Список студентов</h1>
+<ul>
+
+    {% for item in students %}
+    <li>
+        {{item.name}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

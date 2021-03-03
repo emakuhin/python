@@ -1,0 +1,22 @@
+{% extends "wrapper.html" %}
+{% block title %}
+Запись на курс
+{% endblock %}
+{% block body %}
+<h1>Запись на курс</h1>
+<form method="post">
+        <select name = "student">
+        <option selected>Студенты</option>
+        {% for item in students %}
+        <option>{{item.name}}</option>
+        {% endfor %}
+    </select>
+    <select name = "courses">
+        <option selected>Курсы</option>
+        {% for item in courses %}
+        <option>{{item.name}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}
