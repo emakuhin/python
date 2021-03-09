@@ -2,6 +2,9 @@ from core import Application
 from functions import render
 from wsgiref.simple_server import make_server
 from models import Logger, TrainingSite, debug, EmailNotifier, SmsNotifier, BaseSerializer
+from unitofwork import UnitOfWork
+from mappers import MapperRegistry
+from cbv import CreateView, ListView
 
 
 
@@ -9,6 +12,8 @@ logger = Logger('main')
 site = TrainingSite()
 email_notifier = EmailNotifier()
 sms_notifier = SmsNotifier()
+UnitOfWork.new_current()
+UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 
 
@@ -25,8 +30,31 @@ front_controllers = [
     names_controller
 ]
 
+class StudentCreateView(CreateView):
+    template_name = 'create_student.html'
 
-urlpatterns = {}
+    def create_obj(self, data: dict):
+        name = data['name']
+        name = Application.decode_value(name)
+        new_obj = site.create_user('student', name)
+        site.students.append(new_obj)
+        new_obj.mark_new()
+        UnitOfWork.get_current().commit()
+
+class StudentListView(ListView):
+    # queryset = site.students
+    template_name = 'student_list.html'
+
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('student')
+        return mapper.all()
+
+
+
+
+
+urlpatterns = {'/students/': StudentListView(),
+    '/create_student/': StudentCreateView()}
 
 application = Application(urlpatterns, front_controllers)
 
@@ -78,18 +106,7 @@ def category_list(request):
     logger.log('Список категорий')
     return '200 OK', render('category_list.html', items=site.categories)
 
-@application.add_route('/create_student/')
-def create_student(request):
-    if request['method'] == 'POST':
-        data = request['data']
-        name = Application.decode_value(data['name'])
-        new_obj = site.create_user('student', name)
-        site.students.append(new_obj)
-    return '200 OK', render('create_student.html')
 
-@application.add_route('/students/')
-def student_list(request):
-    return '200 OK', render('student_list.html', students=site.students)
 
 
 @application.add_route('/add_student/')

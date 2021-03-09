@@ -1,6 +1,7 @@
 from singletone import SingletonByName
 import time
 import jsonpickle
+from unitofwork import DomainObject
 
 class User:
     def __init__(self, name):
@@ -9,7 +10,7 @@ class User:
 class Teacher(User):
     pass
 
-class Student(User):
+class Student(User, DomainObject):
     def __init__(self, name):
         self.courses = []
         super().__init__(name)
